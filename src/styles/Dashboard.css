@@ -1,0 +1,60 @@
+.landing-container {
+    background-color: black;
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .get-started {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .content {
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  ul li::before {
+    content: "⚡"; /* Pulsing effect can be added dynamically with JS */
+    margin-right: 8px;
+    animation: pulse 1.5s infinite alternate;
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+  
+  .footer {
+    margin-top: 20px;
+  }
+  
