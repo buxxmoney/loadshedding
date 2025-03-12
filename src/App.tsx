@@ -1,40 +1,30 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import Navbar from "./components/Navbar";
+import "@aws-amplify/ui-react/styles.css";
+import { Amplify } from "aws-amplify";
+import outputs from "../amplify_outputs.json";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Marketplace from "./pages/EnergyMarketplace";
+import Footer from "./components/Footer";
 
-const client = generateClient<Schema>();
+Amplify.configure(outputs);
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
+    <Router>
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <Navbar /> {/* Navbar stays at the top with highest z-index */}
+        <div style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/MarketPlace" element={<Marketplace />} />
+          </Routes>
+        </div>
+        <Footer /> {/* Footer stays at the bottom */}
       </div>
-    </main>
+    </Router>
   );
 }
+
 
 export default App;

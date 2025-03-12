@@ -1,8 +1,9 @@
 body {
   margin: 0;
-  background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+  background: #030637;
   display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color:white;
   height: 100vh;
   width: 100vw;
   justify-content: center;
@@ -22,18 +23,19 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #030637;
   cursor: pointer;
   transition: border-color 0.25s;
   color: white;
 }
 button:hover {
-  border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+
 
 ul {
   padding-inline-start: 0;
@@ -62,4 +64,40 @@ li:hover {
 a {
   font-weight: 800;
   text-decoration: none;
+}
+
+[data-amplify-authenticator] {
+  --amplify-components-authenticator-router-box-shadow: 0 0 16px var(--amplify-colors-overlay-10);
+  --amplify-components-authenticator-router-border-width: 0;
+  --amplify-components-authenticator-form-padding: var(--amplify-space-medium) var(--amplify-space-xl) var(--amplify-space-xl);
+  
+  /* Primary Button */
+  --amplify-components-button-primary-background-color: #910A67; /* Dark Magenta */
+  --amplify-components-button-primary-color: white; /* White */
+  --amplify-components-button-primary-hover-background-color: #720455; /* Deep Purple */
+  --amplify-components-button-primary-hover-color: white; /* Keep text white on hover */
+  
+  /* Focus Outline */
+  --amplify-components-fieldcontrol-focus-box-shadow: 0 0 0 2px #720455; /* Deep Purple */
+  
+  /* Tabs */
+  --amplify-components-tabs-item-active-border-color: #3C0753; /* Purple */
+  --amplify-components-tabs-item-color: #3C0753; /* White */
+  --amplify-components-tabs-item-active-color: #910A67; /* Dark Magenta */
+  --amplify-components-tabs-item-hover-color: #720455;
+  
+  /* Links */
+  --amplify-components-button-link-color: #720455; /* Deep Purple */
+  --amplify-components-accordion-item-trigger-focus-border-color: #3C0753;
+}
+
+@media (max-width: 768px) {
+  .amplify-table {
+    font-size: 0.8rem; /* Reduce font size on smaller screens */
+  }
+
+  .amplify-button {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
 }
