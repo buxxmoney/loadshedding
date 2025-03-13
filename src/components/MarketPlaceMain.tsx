@@ -63,6 +63,8 @@ const MarketPlaceMain = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
+      const userAttributes = await fetchUserAttributes();
+      const ownerUsername = userAttributes?.sub;
       const totalPrice = parseFloat(formData.energy) * parseFloat(formData.pricePerKwh); // Calculate total price
 
       await client.models.Listing.create({
@@ -73,6 +75,7 @@ const MarketPlaceMain = () => {
         totalPrice, // ✅ Now included
         location: formData.location,
         createdAt: new Date().toISOString(),
+        owner: ownerUsername,
       });
 
       setShowForm(false); // Close form after submission
@@ -82,6 +85,8 @@ const MarketPlaceMain = () => {
       console.error("Error adding listing:", error);
     }
   };
+
+  
 
   return (
     <View style={{ 
@@ -161,7 +166,7 @@ const MarketPlaceMain = () => {
               <TableCell color="white">{listing.location}</TableCell>
               <TableCell>
                 <Button 
-                  onClick={() => handleBuyNow(listing)}
+                  
                   backgroundColor="#910A67"
                   color="white"
                 >
