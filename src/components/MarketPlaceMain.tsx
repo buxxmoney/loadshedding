@@ -86,7 +86,38 @@ const MarketPlaceMain = () => {
     }
   };
 
-  
+  interface Listing {
+    id: string;
+    totalPrice: number;
+    //url: 'http://localhost:5173/success?listingId=${listingId}';
+  }
+
+  const handleBuyNow = async (listing: Listing) => {
+    console.log("🛒 Buy Now clicked for listing:", listing);
+    try {
+        const response = await fetch(
+            "https://iac1remhtj.execute-api.us-west-1.amazonaws.com/test",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    price: listing.totalPrice,  // Ensure this matches what Stripe expects
+                    listingId: listing.id
+                }),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to create checkout session");
+        }
+
+        const { id } = await response.json();
+        window.location.href = `https://checkout.stripe.com/pay/${id}`; // Redirect user to Stripe
+    } catch (error) {
+        console.error("❌ Error processing payment:", error);
+    }
+};
+
 
   return (
     <View style={{ 
@@ -166,7 +197,7 @@ const MarketPlaceMain = () => {
               <TableCell color="white">{listing.location}</TableCell>
               <TableCell>
                 <Button 
-                  
+                  onClick={() => handleBuyNow(listing)}
                   backgroundColor="#910A67"
                   color="white"
                 >
