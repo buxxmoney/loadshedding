@@ -17,10 +17,10 @@ const headers = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
-export const handler = async (event: { httpMethod: string; body?: string }) => {
+export const handler = async (event: any) => {
     console.log("🔍 HTTP Method Received:", event.httpMethod);
     console.log("🔍 Full Event Data:", JSON.stringify(event, null, 2));
-
+    console.log("Full event received from api gateway", JSON.stringify(event, null, 2));
     // ✅ Handle CORS Preflight Requests
     if (event.httpMethod === "OPTIONS") {
         console.log("✅ OPTIONS Request Handled");
