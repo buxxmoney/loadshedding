@@ -9,7 +9,7 @@ if (!STRIPE_SECRET_KEY) {
 
 console.log("🔑 Stripe API Key Loaded:", STRIPE_SECRET_KEY ? "Yes" : "No");
 
-const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2022-11-15" });
+const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
