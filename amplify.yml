@@ -9,6 +9,7 @@ frontend:
   phases:
     build:
       commands:
+        - echo "REACT_APP_TEST_VARIABLE=$REACT_APP_TEST_VARIABLE" >> .env
         - npm run build
   artifacts:
     baseDirectory: dist

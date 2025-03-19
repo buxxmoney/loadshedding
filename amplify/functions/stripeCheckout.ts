@@ -1,13 +1,16 @@
 import Stripe from "stripe";
+import { secret } from '@aws-amplify/backend'
 
 // ✅ Load Stripe Secret Key (Use environment variables in production)
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || 'sk_test_51R1i0dJCKwEQ6buBmFCsLDGkInJoKRNALUKcc0KsaUzJqiS694geTgVItlP9Hmgvg61LyVV49mogqRKRKRV8UOiI007HsYAgyo';
+const STRIPE_SECRET_KEY = 'I am a poes';
 
 if (!STRIPE_SECRET_KEY) {
   throw new Error("❌ Missing STRIPE_SECRET_KEY in environment variables.");
 }
 
 console.log("🔑 Stripe API Key Loaded:", STRIPE_SECRET_KEY ? "Yes" : "No");
+console.log("🔑 Stripe API Key Loaded:", STRIPE_SECRET_KEY ? "Yes" : "No");
+console.log('REACT_APP_TEST_VARIABLE', process.env.REACT_APP_TEST_VARIABLE);
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
