@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { secret } from '@aws-amplify/backend'
 
 // ✅ Load Stripe Secret Key (Use environment variables in production)
-const STRIPE_SECRET_KEY = 'I am a poes';
+const STRIPE_SECRET_KEY = process.env.REACT_APP_TEST_VARIABLE;
 
 if (!STRIPE_SECRET_KEY) {
   throw new Error("❌ Missing STRIPE_SECRET_KEY in environment variables.");
