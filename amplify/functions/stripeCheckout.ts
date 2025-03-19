@@ -1,11 +1,13 @@
 import Stripe from "stripe";
-import { secret } from '@aws-amplify/backend'
-
+import { defineFunction, secret } from '@aws-amplify/backend'
+import { env } from '$amplify/env/stripeCheckout'
 // ✅ Load Stripe Secret Key (Use environment variables in production)
 
 //const STRIPE_SECRET_KEY = process.env.REACT_APP_TEST_VARIABLE;
-const STRIPE_SECRET_KEY = secret('STRIPE_SECRET_KEY');
-console.log(STRIPE_SECRET_KEY);
+//const STRIPE_SECRET_KEY = secret('STRIPE_SECRET_KEY');
+//console.log(STRIPE_SECRET_KEY);
+
+const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
 
 if (!STRIPE_SECRET_KEY) {
   throw new Error("❌ Missing STRIPE_SECRET_KEY in environment variables.");
@@ -26,7 +28,7 @@ const headers = {
 export const handler = async (event: any) => {
     console.log("🔍 HTTP Method Received:", event.httpMethod);
     console.log("🔍 Full Event Data:", JSON.stringify(event, null, 2));
-    console.log("Full event received from api gateway", JSON.stringify(event, null, 2));
+    
     // ✅ Handle CORS Preflight Requests
     if (event.httpMethod === "OPTIONS") {
         console.log("✅ OPTIONS Request Handled");
