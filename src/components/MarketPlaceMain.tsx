@@ -63,6 +63,8 @@ const MarketPlaceMain = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
+      const userAttributes = await fetchUserAttributes();
+      const ownerUsername = userAttributes?.sub;
       const totalPrice = parseFloat(formData.energy) * parseFloat(formData.pricePerKwh); // Calculate total price
 
       await client.models.Listing.create({
@@ -73,6 +75,7 @@ const MarketPlaceMain = () => {
         totalPrice, // ✅ Now included
         location: formData.location,
         createdAt: new Date().toISOString(),
+        owner: ownerUsername,
       });
 
       setShowForm(false); // Close form after submission
@@ -82,6 +85,44 @@ const MarketPlaceMain = () => {
       console.error("Error adding listing:", error);
     }
   };
+
+  interface Listing {
+    id: string;
+    totalPrice: number;
+    //url: 'http://localhost:5173/success?listingId=${listingId}';
+  }
+
+  const handleBuyNow = async (listing: Listing) => {
+    console.log("🛒 Buy Now clicked for listing:", listing);
+    try {
+        const response = await fetch(
+            "https://iac1remhtj.execute-api.us-west-1.amazonaws.com/test",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    price: listing.totalPrice,  // Ensure this matches what Stripe expects
+                    listingId: listing.id
+                }),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to create checkout session");
+        }
+
+        const session = await response.json();  // ✅ Get the full session response
+        if (!session || !session.url) {
+            throw new Error("Stripe session creation failed: No URL returned");
+        }
+
+        console.log("✅ Redirecting to Stripe Checkout:", session.url);
+        window.location.href = session.url; // ✅ Correct way to redirect user to Stripe Checkout
+    } catch (error) {
+        console.error("❌ Error processing payment:", error);
+    }
+};
+
 
   return (
     <View style={{ 
