@@ -111,8 +111,13 @@ const MarketPlaceMain = () => {
             throw new Error("Failed to create checkout session");
         }
 
-        const { id } = await response.json();
-        window.location.href = `https://checkout.stripe.com/pay/${id}`; // Redirect user to Stripe
+        const session = await response.json();  // ✅ Get the full session response
+        if (!session || !session.url) {
+            throw new Error("Stripe session creation failed: No URL returned");
+        }
+
+        console.log("✅ Redirecting to Stripe Checkout:", session.url);
+        window.location.href = session.url; // ✅ Correct way to redirect user to Stripe Checkout
     } catch (error) {
         console.error("❌ Error processing payment:", error);
     }
