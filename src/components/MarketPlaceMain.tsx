@@ -37,7 +37,7 @@ const MarketPlaceMain = () => {
   // ✅ Fetch listings from DynamoDB
   const fetchListings = async () => {
     try {
-
+      
       const { data } = await client.models.Listing.list({
         authMode: "userPool"
       });
@@ -63,8 +63,8 @@ const MarketPlaceMain = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const userAttributes = await fetchUserAttributes();
-      const ownerUsername = userAttributes?.sub;
+      //const userAttributes = await fetchUserAttributes();
+      //const ownerUsername = userAttributes?.sub;
       const totalPrice = parseFloat(formData.energy) * parseFloat(formData.pricePerKwh); // Calculate total price
 
       await client.models.Listing.create({
@@ -75,7 +75,6 @@ const MarketPlaceMain = () => {
         totalPrice, // ✅ Now included
         location: formData.location,
         createdAt: new Date().toISOString(),
-        owner: ownerUsername,
       });
 
       setShowForm(false); // Close form after submission
@@ -102,7 +101,9 @@ const MarketPlaceMain = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     price: listing.totalPrice,  // Ensure this matches what Stripe expects
-                    listingId: listing.id
+                    listingId: listing.id,
+                    successUrl: `${window.location.origin}/success?listingId=${listing.id}`,
+                    cancelUrl: `${window.location.origin}/marketplace`
                 }),
             }
         );
@@ -167,6 +168,7 @@ const MarketPlaceMain = () => {
     margin: "0 auto",
     borderRadius: "10px"
   }}>
+    
     <Table variation="bordered" style={{ width: "100%", borderCollapse: "collapse" }}>
       
       {/* ✅ Fix Table Header Position */}
