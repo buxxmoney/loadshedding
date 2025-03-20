@@ -4,7 +4,7 @@ import React from "react"
 
 const HomePage: React.FC = () => {
     return(
-        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", paddingTop: "80px" }}>
             <HomePageMain />
         </div>
     )

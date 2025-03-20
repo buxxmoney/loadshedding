@@ -63,8 +63,8 @@ const MarketPlaceMain = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const userAttributes = await fetchUserAttributes();
-      const ownerUsername = userAttributes?.sub;
+      // const userAttributes = await fetchUserAttributes();
+      // const ownerUsername = userAttributes?.sub;
       const totalPrice = parseFloat(formData.energy) * parseFloat(formData.pricePerKwh); // Calculate total price
 
       await client.models.Listing.create({
@@ -75,7 +75,7 @@ const MarketPlaceMain = () => {
         totalPrice, // ✅ Now included
         location: formData.location,
         createdAt: new Date().toISOString(),
-        owner: ownerUsername,
+        //owner: ownerUsername,
       });
 
       setShowForm(false); // Close form after submission

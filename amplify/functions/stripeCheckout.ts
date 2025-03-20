@@ -3,10 +3,6 @@ import { defineFunction, secret } from '@aws-amplify/backend'
 import { env } from '$amplify/env/stripeCheckout'
 // ✅ Load Stripe Secret Key (Use environment variables in production)
 
-//const STRIPE_SECRET_KEY = process.env.REACT_APP_TEST_VARIABLE;
-//const STRIPE_SECRET_KEY = secret('STRIPE_SECRET_KEY');
-//console.log(STRIPE_SECRET_KEY);
-
 const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
 
 if (!STRIPE_SECRET_KEY) {
@@ -77,7 +73,7 @@ export const handler = async (event: any) => {
                 },
             ],
             success_url: `http://localhost:5173/success?listingId=${listingId}`,
-            cancel_url: `https://your-app-url.com/cancel`,
+            cancel_url: `https://localhost:5173/marketplace`,
         });
 
         console.log("✅ Stripe Session Created:", session);
