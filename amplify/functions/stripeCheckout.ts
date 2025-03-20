@@ -72,7 +72,7 @@ export const handler = async (event: any) => {
                     quantity: 1,
                 },
             ],
-            success_url: `http://localhost:5173/success?listingId=${listingId}`,
+            success_url: `https://transaction-history.dci62owr8wucf.amplifyapp.com/success?listingId=${listingId}`,
             cancel_url: `https://localhost:5173/marketplace`,
         });
 
