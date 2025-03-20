@@ -6,6 +6,7 @@ const Footer = () => {
       as="footer"
       backgroundColor="#030637"
       color="white"
+      paddingTop="7rem"
       padding="1.5rem"
       justifyContent="space-evenly"
       alignItems="center"

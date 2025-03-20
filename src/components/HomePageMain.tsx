@@ -1,12 +1,14 @@
 import { Flex, Button, Text, View } from "@aws-amplify/ui-react";
-
+import { useNavigate } from "react-router-dom";
 const HomePageMain = () => {
+  const navigate = useNavigate();
   return (
     <Flex
       as="main"
       backgroundColor="#030637"
       color="white"
-      padding="3vh 4vw" // Reduced padding to fit content
+      paddingTop="15vh"
+      padding="3vh 3vw" // Reduced padding to fit content
       justifyContent="space-between"
       alignItems="center"
       width="100%"
@@ -33,6 +35,7 @@ const HomePageMain = () => {
             borderRadius="5px"
             padding="0.75vw 1.5vw"
             fontSize="1vw"
+            onClick={() => navigate("/marketplace")}
           >
             Get Started
           </Button>
@@ -43,6 +46,7 @@ const HomePageMain = () => {
             borderRadius="5px"
             padding="0.75vw 1.5vw"
             fontSize="1vw"
+            onClick={() => navigate("/learn-more")}
           >
             Learn More
           </Button>
@@ -50,7 +54,7 @@ const HomePageMain = () => {
       </Flex>
 
       {/* Right Section - SVG Image */}
-      <View width="50%" display="flex" marginTop="auto">
+      <View width="50%" display="flex" marginTop="auto" paddingTop="90px">
         <img
           src="/electricbulb.svg"
           alt="Illustration"

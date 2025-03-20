@@ -55,7 +55,7 @@ const SuccessPage = () => {
 
         // ✅ Create a transaction record
         const newTransaction = await client.models.Transaction.create({
-          sellerId: listing.sellerId,
+          sellerId: listing.owner ?? "",
           buyerId: buyerId,
           energy: listing.energy,
           pricePerKwh: listing.pricePerKwh,
@@ -63,7 +63,9 @@ const SuccessPage = () => {
           createdAt: new Date().toISOString(),
           listingId: listingId
         });
-
+        console.log("🔍 Listing Data Before Creating Transaction:", listing);
+        console.log("🔍 Seller ID from Listing:", listing.sellerId);
+        console.log("🔍 Buyer ID (Authenticated User):", buyerId);
         console.log("✅ Transaction created:", newTransaction);
 
         // ✅ DELETE the listing after successful transaction
@@ -78,6 +80,8 @@ const SuccessPage = () => {
         setIsProcessing(false);
       }
     };
+
+    
 
     processTransaction();
   }, []); // ✅ Ensures this runs only once on mount

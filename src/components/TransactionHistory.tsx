@@ -14,12 +14,6 @@ const TransactionHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const transactionsPerPage = 10;
 
-
-    const indexOfLastTransaction = currentPage * transactionsPerPage;
-    const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-    const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
-    const totalPages = Math.max(1, Math.ceil(transactions.length / transactionsPerPage));
-
     useEffect(() => {
         const fetchUserAndTransactions = async () => {
             try {
@@ -67,6 +61,10 @@ const TransactionHistory = () => {
     };
 
     const filteredTransactions = getFilteredTransactions();
+    const indexOfLastTransaction = currentPage * transactionsPerPage;
+    const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+    const currentTransactions = filteredTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
+    const totalPages = Math.max(1, Math.ceil(transactions.length / transactionsPerPage));
 
     // Format date
     const formatDate = (dateString: string) => {
@@ -158,12 +156,12 @@ const TransactionHistory = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {filteredTransactions.length === 0 ? (
+                                            {currentTransactions.length === 0 ? (
                                                 <TableRow>
                                                     <TableCell color="white" colSpan={6} textAlign="center">No transactions found.</TableCell>
                                                 </TableRow>
                                             ) : (
-                                                filteredTransactions.map((tx) => (
+                                                currentTransactions.map((tx) => (
                                                     <TableRow key={tx.id}>
                                                         <TableCell color="white">{formatDate(tx.createdAt)}</TableCell>
                                                         <TableCell color="white">

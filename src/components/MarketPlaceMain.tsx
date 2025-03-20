@@ -63,12 +63,16 @@ const MarketPlaceMain = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      // const userAttributes = await fetchUserAttributes();
-      // const ownerUsername = userAttributes?.sub;
+      const userAttributes = await fetchUserAttributes();
+      const authenticatedUserId = userAttributes?.sub;
       const totalPrice = parseFloat(formData.energy) * parseFloat(formData.pricePerKwh); // Calculate total price
 
+      if(!authenticatedUserId){
+        throw new Error("User ID is null or undefined.")
+      }
+
       await client.models.Listing.create({
-        sellerId: formData.sellerId,
+        sellerId: authenticatedUserId,
         sellerName: formData.sellerName,
         energy: parseFloat(formData.energy),
         pricePerKwh: parseFloat(formData.pricePerKwh),
@@ -249,12 +253,6 @@ const MarketPlaceMain = () => {
             
             {/* Form Fields */}
             <form onSubmit={handleSubmit}>
-              <Label>Seller ID:</Label>
-              <Input
-                required
-                value={formData.sellerId}
-                onChange={(e) => setFormData({ ...formData, sellerId: e.target.value })}
-              />
 
               <Label>Seller Name:</Label>
               <Input

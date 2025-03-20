@@ -8,6 +8,7 @@ import Marketplace from "./pages/EnergyMarketplace";
 import TransactionHistory from "./components/TransactionHistory"; // Import TransactionHistory page
 import SuccessPage from "./pages/SuccessPage"; // Import Success page
 import Footer from "./components/Footer";
+import LearnMore from "./pages/LearnMore";
 
 Amplify.configure(outputs);
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/transactions" element={<TransactionHistory />} />
             <Route path="/success" element={<SuccessPage />} />
+            <Route path="/learn-more" element={<LearnMore/>} />
           </Routes>
         </div>
         <Footer /> {/* Footer stays at the bottom */}
