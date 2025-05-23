@@ -1,25 +1,57 @@
-## AWS Amplify React+Vite Starter Template
+# ⚡ Load Shedding Community Power Hub
 
-This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+A full-stack web application that empowers communities to mitigate the effects of rolling blackouts (load shedding) by tracking schedules, sharing surplus energy, and promoting solar adoption.
 
-## Overview
+## 🌍 Overview
 
-This template equips you with a foundational React application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+Built with AWS Amplify, React, and Stripe, this platform provides:
 
-## Features
+- ✅ **Real-time load shedding visibility**
+- ✅ **Peer-to-peer energy listings and purchases**
+- ✅ **A community-driven energy marketplace**
+- ✅ **Secure Stripe Checkout integration for energy payments**
+- ✅ **Role-based access with Amplify Auth and DynamoDB**
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+---
 
-## Deploying to AWS
+## 🚀 Live Demo
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/react/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
+🔗 [View Live Site](https://transaction-history.dci62owr8wucf.amplifyapp.com)
 
-## Security
+---
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+## 🛠️ Tech Stack
 
-## License
+| Frontend        | Backend            | Cloud Infrastructure |
+|-----------------|--------------------|-----------------------|
+| React.js + TypeScript | AWS Lambda (Stripe Checkout) | AWS Amplify Gen 2 |
+| AWS Amplify UI  | DynamoDB (Energy Listings & Transactions) | API Gateway |
+| React Router    | Node.js (custom functions) | AWS Cognito Auth |
+| Stripe API | IAM, CloudWatch |
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+---
+
+## 💡 Features
+
+### 🕒 Load Shedding Schedules  
+Track rolling blackouts in real-time to help users prepare.
+
+### ⚡ Energy Marketplace  
+List surplus solar energy or browse available energy from others nearby.
+
+### 💳 Stripe Integration  
+Secure, real-money transactions via Stripe Checkout sessions.
+
+### 📊 Transaction History  
+Authenticated users can view detailed records of past transactions.
+
+### 🔐 User Authentication  
+Sign up, log in, and manage listings with secure access.
+
+---
+
+## 📷 Screenshots
+
+<img src="/public/screenshots/marketplace.png" alt="Marketplace" width="700"/>
+<img src="/public/screenshots/checkout.png" alt="Checkout" width="700"/>
+<img src="/public/screenshots/transactions.png" alt="Transaction History" width="700"/>
