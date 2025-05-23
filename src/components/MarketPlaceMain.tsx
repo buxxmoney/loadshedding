@@ -10,22 +10,22 @@ const MarketPlaceMain = () => {
   const [showForm, setShowForm] = useState(false);
   const [listings, setListings] = useState<Schema["Listing"]["type"][]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const listingsPerPage = 10; // ✅ Change this to control number of rows per page
+  const listingsPerPage = 10; //  Change this to control number of rows per page
 
   useEffect(() => {
     const checkUser = async () => {
       try {
         const userAttributes = await fetchUserAttributes();
-        console.log("✅ Authenticated user attributes:", userAttributes);
+        console.log(" Authenticated user attributes:", userAttributes);
       } catch (error) {
-        console.error("❌ User is not logged in or authentication failed:", error);
+        console.error(" User is not logged in or authentication failed:", error);
       }
     };
 
     checkUser();
   }, []); // Runs once when the component mounts
 
-  // ✅ Form state
+  //  Form state
   const [formData, setFormData] = useState({
     sellerId: "",
     sellerName: "",
@@ -34,7 +34,7 @@ const MarketPlaceMain = () => {
     location: "",
   });
 
-  // ✅ Fetch listings from DynamoDB
+  //  Fetch listings from DynamoDB
   const fetchListings = async () => {
     try {
       
@@ -52,29 +52,34 @@ const MarketPlaceMain = () => {
     fetchListings();
   }, []);
 
-  // ✅ Pagination Logic
+  //  Pagination Logic
   const indexOfLastListing = currentPage * listingsPerPage;
   const indexOfFirstListing = indexOfLastListing - listingsPerPage;
   const currentListings = listings.slice(indexOfFirstListing, indexOfLastListing);
   const totalPages = Math.max(1, Math.ceil(listings.length / listingsPerPage));
 
 
-  // ✅ Handle Form Submission
+  //  Handle Form Submission
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      //const userAttributes = await fetchUserAttributes();
-      //const ownerUsername = userAttributes?.sub;
+      const userAttributes = await fetchUserAttributes();
+      const authenticatedUserId = userAttributes?.sub;
       const totalPrice = parseFloat(formData.energy) * parseFloat(formData.pricePerKwh); // Calculate total price
 
+      if(!authenticatedUserId){
+        throw new Error("User ID is null or undefined.")
+      }
+
       await client.models.Listing.create({
-        sellerId: formData.sellerId,
+        sellerId: authenticatedUserId,
         sellerName: formData.sellerName,
         energy: parseFloat(formData.energy),
         pricePerKwh: parseFloat(formData.pricePerKwh),
-        totalPrice, // ✅ Now included
+        totalPrice, //  Now included
         location: formData.location,
         createdAt: new Date().toISOString(),
+        //owner: ownerUsername,
       });
 
       setShowForm(false); // Close form after submission
@@ -112,15 +117,15 @@ const MarketPlaceMain = () => {
             throw new Error("Failed to create checkout session");
         }
 
-        const session = await response.json();  // ✅ Get the full session response
+        const session = await response.json();  //  Get the full session response
         if (!session || !session.url) {
             throw new Error("Stripe session creation failed: No URL returned");
         }
 
-        console.log("✅ Redirecting to Stripe Checkout:", session.url);
-        window.location.href = session.url; // ✅ Correct way to redirect user to Stripe Checkout
+        console.log(" Redirecting to Stripe Checkout:", session.url);
+        window.location.href = session.url; //  Correct way to redirect user to Stripe Checkout
     } catch (error) {
-        console.error("❌ Error processing payment:", error);
+        console.error(" Error processing payment:", error);
     }
 };
 
@@ -129,20 +134,20 @@ const MarketPlaceMain = () => {
     <View style={{ 
       display: "flex", 
       flexDirection: "column", 
-      alignItems: "center",  // ✅ Centers everything
-      minHeight: "100vh",    // ✅ Ensures the page stretches properly
+      alignItems: "center",  //  Centers everything
+      minHeight: "100vh",    //  Ensures the page stretches properly
       width: "100%", 
-      maxWidth: "1200px",    // ✅ Restricts width to prevent page from being too wide
-      margin: "0 auto"       // ✅ Centers the content
+      maxWidth: "1200px",    //  Restricts width to prevent page from being too wide
+      margin: "0 auto"       //  Centers the content
      }}>
   
-  {/* ✅ Keep "Add Listing" button fixed but move it down slightly */}
+  {/*  Keep "Add Listing" button fixed but move it down slightly */}
   <View style={{
     background: "#030637",
     padding: "1rem",
     position: "absolute",
-    top: "100px",  // ✅ Adjusted from 80px to 100px to move it down
-    zIndex: 10,               // ✅ Ensures it's above the table
+    top: "100px",  //  Adjusted from 80px to 100px to move it down
+    zIndex: 10,               //  Ensures it's above the table
   }}>
     <Button onClick={() => setShowForm(true)} 
       backgroundColor="#910A67" 
@@ -153,9 +158,9 @@ const MarketPlaceMain = () => {
   </View>
   <View style={{
     width: "100%",
-    marginTop: "360px",  // ✅ Pushes table down even more
+    marginTop: "360px",  //  Pushes table down even more
   }}>
-  {/* ✅ Scrollable Table Body (Only the content should scroll) */}
+  {/* Scrollable Table Body (Only the content should scroll) */}
   <View style={{
     background: "#030637",
     padding: "1rem",
@@ -171,12 +176,12 @@ const MarketPlaceMain = () => {
     
     <Table variation="bordered" style={{ width: "100%", borderCollapse: "collapse" }}>
       
-      {/* ✅ Fix Table Header Position */}
+      {/*  Fix Table Header Position */}
       <TableHead style={{
         position: "sticky",
-        top: "0px",  // ✅ Keeps it at the top of the scrolling container
+        top: "0px",  //  Keeps it at the top of the scrolling container
         backgroundColor: "#3C0753",
-        zIndex: 10,  // ✅ Ensures it's above table content
+        zIndex: 10,  //  Ensures it's above table content
       }}>
         <TableRow>
           <TableCell color="white">Seller</TableCell>
@@ -220,7 +225,7 @@ const MarketPlaceMain = () => {
   </View>
   </View>
 
-  {/* ✅ Pagination Stays Fixed Below Table */}
+  {/*  Pagination Stays Fixed Below Table */}
   <Flex justifyContent="center" marginTop="1rem" style={{zIndex: 5}}>
     <Button 
       color="white"
@@ -241,7 +246,7 @@ const MarketPlaceMain = () => {
 
 
 
-      {/* ✅ Custom Modal Pop-up for Adding Listing */}
+      {/*  Custom Modal Pop-up for Adding Listing */}
       {showForm && (
         <View style={modalStyle}>
           <View style={modalContentStyle}>
@@ -251,12 +256,6 @@ const MarketPlaceMain = () => {
             
             {/* Form Fields */}
             <form onSubmit={handleSubmit}>
-              <Label>Seller ID:</Label>
-              <Input
-                required
-                value={formData.sellerId}
-                onChange={(e) => setFormData({ ...formData, sellerId: e.target.value })}
-              />
 
               <Label>Seller Name:</Label>
               <Input
@@ -305,7 +304,7 @@ const MarketPlaceMain = () => {
   );
 };
 
-/* ✅ Basic Modal Styles */
+/* Basic Modal Styles */
 const modalStyle = {
   position: "fixed" as const,
   top: 0,

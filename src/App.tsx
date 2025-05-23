@@ -5,7 +5,10 @@ import outputs from "../amplify_outputs.json";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Marketplace from "./pages/EnergyMarketplace";
+import TransactionHistory from "./components/TransactionHistory"; // Import TransactionHistory page
+import SuccessPage from "./pages/SuccessPage"; // Import Success page
 import Footer from "./components/Footer";
+import LearnMore from "./pages/LearnMore";
 
 Amplify.configure(outputs);
 
@@ -14,10 +17,13 @@ function App() {
     <Router>
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Navbar /> {/* Navbar stays at the top with highest z-index */}
-        <div style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+        <div style={{ flexGrow: 1, display: "flex", flexDirection: "column", overflowX: "hidden" }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/MarketPlace" element={<Marketplace />} />
+            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/transactions" element={<TransactionHistory />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/learn-more" element={<LearnMore/>} />
           </Routes>
         </div>
         <Footer /> {/* Footer stays at the bottom */}
@@ -25,6 +31,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;
