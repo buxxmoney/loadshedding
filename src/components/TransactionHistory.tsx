@@ -85,7 +85,7 @@ const TransactionHistory = () => {
             <View style={{
                 background: "#030637",
                 padding: "1rem",
-                //position: "absolute",
+                position: "absolute",
                 top: "100px",  // Adjusted from 80px to 100px to move it down
                 zIndex: 10,               // Ensures it's above the table
             }}>
