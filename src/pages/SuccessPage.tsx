@@ -22,9 +22,17 @@ const SuccessPage = () => {
 
       try {
         setIsProcessing(true);
-
-        // ✅ Get listingId from URL params
         const listingId = searchParams.get("listingId");
+        // ✅ Get listingId from URL params
+        /*useEffect(() => {
+          
+        
+          if (window.location.hostname === "localhost") {
+            window.location.replace(`https://transaction-history.dci62owr8wucf.amplifyapp.com//success?listingId=${listingId}`);
+          }
+        }, []);*/
+        console.log("🔍 Extracted listingId from URL:", listingId);
+        console.log("🔍 Current window location:", window.location.href);
         if (!listingId) {
           throw new Error("Listing ID not found in URL parameters");
         }
@@ -87,7 +95,24 @@ const SuccessPage = () => {
   }, []); // ✅ Ensures this runs only once on mount
 
   return (
-    <View style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "2rem", backgroundColor: "#f5f5f5" }}>
+    <View style={{ 
+      display: "flex", 
+      flexDirection: "column", 
+      alignItems: "center",  // ✅ Centers everything
+      minHeight: "100vh",    // ✅ Ensures the page stretches properly
+      width: "100%", 
+      maxWidth: "1200px",    // ✅ Restricts width to prevent page from being too wide
+      margin: "0 auto" 
+    }}
+    >
+      <View style={{
+                background: "#030637",
+                padding: "1rem",
+                position: "absolute",
+                top: "100px",  // ✅ Adjusted from 80px to 100px to move it down
+                zIndex: 10,               // ✅ Ensures it's above the table
+            }}
+        >
       <Card style={{ maxWidth: "600px", width: "100%", padding: "2rem", backgroundColor: "#ffffff", borderRadius: "8px", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
         {isProcessing ? (
           <Flex direction="column" alignItems="center" gap="1rem">
@@ -118,6 +143,7 @@ const SuccessPage = () => {
           </Flex>
         )}
       </Card>
+      </View>
     </View>
   );
 };

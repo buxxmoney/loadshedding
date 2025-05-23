@@ -76,18 +76,18 @@ const TransactionHistory = () => {
         <View style={{ 
             display: "flex", 
             flexDirection: "column", 
-            alignItems: "center",  // ✅ Centers everything
-            minHeight: "100vh",    // ✅ Ensures the page stretches properly
+            alignItems: "center",  //  Centers everything
+            minHeight: "100vh",    //  Ensures the page stretches properly
             width: "100%", 
-            maxWidth: "1200px",    // ✅ Restricts width to prevent page from being too wide
-            margin: "0 auto"       // ✅ Centers the content
+            maxWidth: "1200px",    //  Restricts width to prevent page from being too wide
+            margin: "0 auto"       //  Centers the content
            }}>
             <View style={{
                 background: "#030637",
                 padding: "1rem",
                 position: "absolute",
-                top: "100px",  // ✅ Adjusted from 80px to 100px to move it down
-                zIndex: 10,               // ✅ Ensures it's above the table
+                top: "100px",  // Adjusted from 80px to 100px to move it down
+                zIndex: 10,               // Ensures it's above the table
             }}>
                 <View style={{
                     background: "#030637",
