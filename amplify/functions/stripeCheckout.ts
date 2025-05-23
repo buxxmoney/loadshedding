@@ -72,8 +72,8 @@ export const handler = async (event: any) => {
                     quantity: 1,
                 },
             ],
-            success_url: `https://transaction-history.dci62owr8wucf.amplifyapp.com/success?listingId=${listingId}`,
-            cancel_url: `https://transaction-history.dci62owr8wucf.amplifyapp.com//marketplace`,
+            success_url: `https://main.dci62owr8wucf.amplifyapp.com/success?listingId=${listingId}`,
+            cancel_url: `https://main.dci62owr8wucf.amplifyapp.com/marketplace`,
         });
 
         console.log("✅ Stripe Session Created:", session);
