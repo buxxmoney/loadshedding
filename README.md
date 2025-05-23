@@ -6,7 +6,6 @@ A full-stack web application that empowers communities to mitigate the effects o
 
 Built with AWS Amplify, React, and Stripe, this platform provides:
 
-- ✅ **Real-time load shedding visibility**
 - ✅ **Peer-to-peer energy listings and purchases**
 - ✅ **A community-driven energy marketplace**
 - ✅ **Secure Stripe Checkout integration for energy payments**
@@ -16,7 +15,7 @@ Built with AWS Amplify, React, and Stripe, this platform provides:
 
 ## 🚀 Live Demo
 
-🔗 [View Live Site](https://transaction-history.dci62owr8wucf.amplifyapp.com)
+🔗 [View Live Site](https://main.dci62owr8wucf.amplifyapp.com/)
 
 ---
 
@@ -32,9 +31,6 @@ Built with AWS Amplify, React, and Stripe, this platform provides:
 ---
 
 ## 💡 Features
-
-### 🕒 Load Shedding Schedules  
-Track rolling blackouts in real-time to help users prepare.
 
 ### ⚡ Energy Marketplace  
 List surplus solar energy or browse available energy from others nearby.
