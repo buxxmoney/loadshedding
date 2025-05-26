@@ -48,6 +48,7 @@ Sign up, log in, and manage listings with secure access.
 
 ## 📷 Screenshots
 
-<img src="/public/screenshots/marketplace.png" alt="Marketplace" width="700"/>
-<img src="/public/screenshots/checkout.png" alt="Checkout" width="700"/>
-<img src="/public/screenshots/transactions.png" alt="Transaction History" width="700"/>
+<img src="/public/marketplace.png" alt="Marketplace" width="700"/>
+<img src="/public/about.png" alt="Checkout" width="700"/>
+<img src="/public/wallet.png" alt="Transaction History" width="700"/>
+<img src="/public/home.png" alt="Transaction History" width="700"/>
