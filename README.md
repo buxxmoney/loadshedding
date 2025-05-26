@@ -52,3 +52,4 @@ Sign up, log in, and manage listings with secure access.
 <img src="/public/about.png" alt="Checkout" width="700"/>
 <img src="/public/wallet.png" alt="Transaction History" width="700"/>
 <img src="/public/home.png" alt="Transaction History" width="700"/>
+<img src="/public/image.png" alt="Transaction History" width="700"/>
